@@ -1,0 +1,55 @@
+
+
+<?php if ($block->isAvailable()): ?>
+    <?php if ($block->getTimeTo()>0): ?>
+    <h1>
+    <i>Special Price for you :
+        <?= $block->getSpecPrice(); ?>
+    </i>
+    </h1>
+
+        <div> <n> Special Price will end :</n>
+            <?= $block->getTimeSpecPrice(); ?>
+        </div>
+        <div> <n> Catalog rule Price will end :</n>
+            <?= $block->getTimeCatalogRule(); ?>
+        </div>
+        <div>
+            Remaining time(from ajax) :
+           <div id="idDivAjax" data-mage-init='{"showFromAjax":  {"currentproduct": "<?=$block->getTheId()?>"} }'>
+
+           </div>
+
+        </div>
+
+       <div> Remaining time(inserted script) :
+            <div id="getting-started">
+                <script type="text/javascript">
+                require(['jquery', 'jcountmin', 'jcount'], function($) {
+                $('#getting-started').countdown('<?=$block->whoEarlyStops()?>', function (event) {
+                $(this).html(event.strftime('%D days %H:%M:%S'));
+                });
+                });
+                </script>
+            </div>
+       </div>
+        <div> Remaining time(data-mage-init) :
+
+                <div id="MageStyle-Timer" data-mage-init='{"Countdown":  {"myDate": "<?=$block->getTimeSpecPrice()?>"} }'>
+
+                </div>
+        </div>
+        <div> Remaining time(x-init) :
+                <div id="x-init">
+                    <script type="text/x-magento-init">
+                    { "#x-init":
+                                { "try2": { "myDate": "<?=$block->getTimeSpecPrice()?>" } }
+                    }
+                    </script>
+                </div>
+        </div>
+
+
+    <?php endif; ?>
+
+<?php endif; ?>
